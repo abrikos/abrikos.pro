@@ -1,0 +1,62 @@
+@font-face {
+  font-family: "Digital";
+  src: url("/digital-7.ttf") format("truetype"); }
+.cellImage {
+  width: 70px; }
+
+table.minesweeper td {
+  background-color: silver;
+  padding: 5px;
+  cursor: pointer;
+  border: 2px outset #CCC; }
+  table.minesweeper td .digital {
+    color: red;
+    font-size: 4em;
+    font-family: "Digital", sans-serif;
+    padding: 0;
+    line-height: 1px; }
+table.minesweeper table.board td {
+  width: 70px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%; }
+table.minesweeper table.board td.bomb-near {
+  background-color: #DDD; }
+table.minesweeper table.board td.checked {
+  background-color: #EEE;
+  border-style: solid; }
+table.minesweeper table.board td.bomb {
+  background-color: #EEE; }
+table.minesweeper table.board td.cheater {
+  background-color: yellow; }
+table.minesweeper table.board td.this-mine {
+  background-color: red; }
+table.minesweeper table.board td.pressed {
+  border-style: inset; }
+table.minesweeper table.board td.bombs-count-1 {
+  background-color: #EEE;
+  background-size: 35px; }
+table.minesweeper table.board td.bombs-count-2 {
+  background-color: #EEE;
+  background-size: 35px; }
+table.minesweeper table.board td.bombs-count-3 {
+  background-color: #EEE;
+  background-size: 35px; }
+table.minesweeper table.board td.bombs-count-4 {
+  background-color: #EEE;
+  background-size: 35px; }
+table.minesweeper table.board td.bombs-count-5 {
+  background-color: #EEE;
+  background-size: 35px; }
+table.minesweeper table.board td.bombs-count-6 {
+  background-color: #EEE;
+  background-size: 35px; }
+table.minesweeper table.board td.bombs-count-7 {
+  background-color: #EEE;
+  background-size: 35px; }
+table.minesweeper table.board td.bombs-count-8 {
+  background-color: #EEE;
+  background-size: 35px; }
+
+/*# sourceMappingURL=minesweeper.css.map */
