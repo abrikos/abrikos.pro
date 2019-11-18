@@ -5,7 +5,8 @@ import {Button, ButtonGroup} from 'reactstrap';
 import './minesweeper.css'
 import {t, changeLanguage} from "client/Translator";
 import * as Images from "./images"
-import cellBgImages from 'client/sites/minesweeper/images/cellBgImages'
+import cellBgImages from './images/cellBgImages'
+import Timer from "./timer";
 
 export default function Minesweeper(props) {
     const [level, setLevel] = useState(0);
@@ -13,10 +14,12 @@ export default function Minesweeper(props) {
     const [smileImage, setSmile] = useState('Norm');
     const [timerOn, toggleTimer] = useState(false);
     const [minesLeft, setMinesLeft] = useState(field.minesLeft());
-    const [seconds, setSeconds] = useState(0)
 
 
-    const levels = Config.levels;
+    useEffect(()=>{
+        console.log('RIGHT CLICK')
+        document.addEventListener('contextmenu', handleContextMenu);
+    }, []);
 
 
     function handleContextMenu(event) {
@@ -26,17 +29,22 @@ export default function Minesweeper(props) {
         if (!obj.className.match('cell')) return;
         if (field.isFinished()) return;
         let coordinate = {row: event.path[0].getAttribute('row') * 1, col: event.path[0].getAttribute('col') * 1};
-        console.log(field.minesLeft())
         field.setFlag(coordinate);
+        //setField(field)
         setMinesLeft(field.minesLeft())
     }
 
     function chooseLevel(val) {
-        setSeconds(0)
+        //setSeconds(0)
         toggleTimer(false);
         setLevel(val);
-        setField(new Field(val))
-    };
+        console.log('BEFORE',field.key)
+        const f = new Field(val);
+        setField(f)
+        console.log('FFFFFFFFFFF',field.key)
+        setMinesLeft(0);
+        console.log(field.minesLeft())
+    }
 
     function cellId(cell) {
         return `col-${cell.col}-${cell.row}`;
@@ -74,19 +82,6 @@ export default function Minesweeper(props) {
         //this.setState({field:this.field})
     }
 
-    useEffect(() => {
-        //document.addEventListener('contextmenu', handleContextMenu);
-        let interval = null;
-        if (timerOn) {
-            interval = setInterval(() => {
-                setSeconds(seconds => seconds + 1);
-            }, 1000);
-        } else if (!timerOn && seconds !== 0) {
-            clearInterval(interval);
-        }
-        return () => clearInterval(interval);
-    }, [timerOn, seconds]);
-
     function drawCell(cell) {
         return <td
             key={cellId(cell)}
@@ -99,7 +94,7 @@ export default function Minesweeper(props) {
             row={cell.row}
             col={cell.col}
             children={cell.text}
-        >{cell.getClass()} {cell.mines}</td>
+        >{cell.getClass()}</td>
     }
 
     function drawRows() {
@@ -138,11 +133,11 @@ export default function Minesweeper(props) {
                         <table width="100%" border="1">
                             <tbody>
                             <tr>
-                                <td width="40%" className='digital'>{seconds}</td>
+                                <td width="40%" className='digital'><Timer on={timerOn}/></td>
                                 <td className='text-center'>
                                     <img
                                         src={Images[`smile${smileImage}`]}
-                                        onClick={() => setLevel(level)}
+                                        onClick={() => chooseLevel(level)}
                                         onMouseDown={() => setSmile('Wow')}
                                         onMouseUp={() => {
                                             chooseLevel(level);

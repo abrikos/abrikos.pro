@@ -15,11 +15,13 @@ class Cell {
 
     getClass = () => {
         if(this.status==='checked' && this.mines) return 'bomb-near';
+        if(this.flag) return 'flag';
         return this.status;
     };
 
     getImage = () => {
         if(this.mines) return this.mines;
+        if(this.flag) return 'flag';
         return this.status;
     };
 
@@ -35,6 +37,8 @@ class Field {
     status = 'standby';
 
     constructor(level) {
+        console.log('CREATE NEW FIELD')
+        this.key = new Date().valueOf()
         this.level = Config.levels[level];
         let field = Array.from(Array(this.level.rows * this.level.cols).keys());
         this.rows = new Array(this.level.rows);
@@ -57,7 +61,7 @@ class Field {
         this.setMines(cell);
         if (c.flag) return;
         if (this.isMine(cell)) {
-            cell.status = 'this-mine'
+            cell.status = 'this-mine';
             this.gameOver(cell);
         } else {
             cell.status = 'checked';
@@ -84,7 +88,6 @@ class Field {
 
     crowler(cell) {
         if (cell.mines > 0) {
-            console.log(cell.row, cell.col)
             return;
         }
         const beChecked = [1, 3, 5, 7]
@@ -93,7 +96,6 @@ class Field {
             let col = i % 3;
             let test = this.getCell({row: cell.row - 1 + row, col: cell.col - 1 + col});
             if (test && !this.isSameCell(cell, test) && test.status === 'initial') {
-                console.log(test)
                 test.mines = this.countMines(test);
                 test.status = 'checked';
                 //test.status = test.mines ? 'mines' : 'empty'
@@ -129,9 +131,7 @@ class Field {
         });
         this.#mines = mines.slice(0, this.level.mines);
         //FIXED FIELD
-        const placed = [1, 8, 10, 12, 14, 17, 20, 25, 30, 40];
-        this.#mines = [];
-        for (const i of placed) this.#mines.push(this.cells[i]);
+        //const placed = [1, 8, 10, 12, 14, 17, 20, 25, 30, 40];        this.#mines = [];        for (const i of placed) this.#mines.push(this.cells[i]);
 
         if (this.cheater) {
             this.#mines.map(c => {
@@ -178,7 +178,6 @@ class Field {
         if (!cell) return;
         cell.flag = !cell.flag;
         if (this.level.mines - flags.length > 0) return;
-        cell.status = 'flag';
         cell.flag = false
     }
 
