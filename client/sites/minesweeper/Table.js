@@ -13,7 +13,7 @@ export default function Table(props) {
     const [smileImage, setSmile] = useState('Norm');
     const [timerOn, toggleTimer] = useState(false);
     const [resetTimer, timerReset] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [playing, setPlaying] = useState(true);
     const [minesLeft, setMinesLeft] = useState(0);
     const [field, updateField] = useReducer(reducer, initField);
 
@@ -35,18 +35,18 @@ export default function Table(props) {
 
     function reducer(field, updateFieldArgs) {
         const {cell, result, levelIndex} = updateFieldArgs;
+        if (result === 'restart') {
+            timerReset(true);
+            toggleTimer(false);
+            if (levelIndex >= 0) field.level = config.levels[levelIndex];
+            field.cells = initCells(field.level);
+            setSmile('Norm');
+            setPlaying(true)
+        }
+        if (!playing) return field;
         switch (result) {
             case 'push':
                 setSmile('Wow');
-                break;
-            case 'restart':
-
-                timerReset(true);
-                toggleTimer(false);
-                if (levelIndex >= 0) field.level = config.levels[levelIndex];
-                field.cells = initCells(field.level);
-                console.log('zzzzzzzzzz', levelIndex, field.cells.length)
-                setSmile('Norm');
                 break;
             case 'release':
                 setSmile('Norm');
@@ -64,6 +64,7 @@ export default function Table(props) {
                     timerReset(false);
                     toggleTimer(false);
                     setSmile('Death');
+                    setPlaying(false)
                     break;
                 }
 
@@ -74,13 +75,15 @@ export default function Table(props) {
                     setSmile('Win');
                     toggleTimer(false);
                     field.cells.filter(c => c.mine).map(c => c.status = 'flag');
+                    setPlaying(false)
                 }
                 break;
             case 'flag':
                 setSmile('Norm');
-                field.cells[cell.index].status = 'flag';
                 const flags = field.cells.filter(c => c.status === 'flag').length;
-                setMinesLeft(field.level.mines - flags);
+                if (field.level.mines - flags <= 0) break;
+                field.cells[cell.index].status = 'flag';
+                setMinesLeft(field.level.mines - flags - 1);
         }
         return field
     }
