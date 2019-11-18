@@ -13,14 +13,14 @@ export default function LayoutMain(props) {
     const menuItems = [
         {label: t('Home'), path: '/'},
         {label: t('Contacts'), path: '/contacts'},
-        {label: 'DropDown', items:[
+        /*{label: 'DropDown', items:[
                 {label:'AAAAAAaa', path:'/contacts'},
                 {label:'BBBB', path:'/about'},
-            ]},
+            ]},*/
     ];
 
-    return <div>
-        <TopMenu {...rest} items={menuItems}/>
+    return <div className={'content minesweeper'}>
+        <TopMenu {...rest} items={menuItems} title={'Minesweeper'}/>
         <div className={'container'}>
             <Alert {...alert}/>
             {routeResult}

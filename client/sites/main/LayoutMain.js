@@ -1,7 +1,7 @@
 import React from 'react';
 import TopMenu from "client/components/TopMenu";
 import 'bootstrap/dist/css/bootstrap.css';
-import './style.sass';
+import 'client/sites/main/main.sass';
 import {Alert} from "reactstrap";
 import {A, useRoutes} from "hookrouter";
 import routes from "./RoutesMain";
@@ -20,7 +20,7 @@ export default function LayoutMain(props) {
                 {label:'BBBB', path:'/about'},
             ]},*/
     ];
-    return <div>
+    return <div className={'content main'}>
         <TopMenu {...rest} items={menuItems} title={'Abrikos'}/>
         <Alert {...alert}/>
         <div className={'container'}>

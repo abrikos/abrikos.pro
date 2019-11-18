@@ -4,7 +4,7 @@ import logo from "client/images/logo.png";
 export default function Portfolio(props) {
 
     return <div className={'text-center'}>
-        <h1 className={'text-light'}>Портфолио</h1>
+        <h1>Портфолио</h1>
         <div><a href={"https://minesweeper.abrikos.pro"}>Классическая игра "Сапер"</a></div>
         <div><a href={"https://minter-earth.pro"}>Гео визитки</a></div>
         <div><a href={"https://telegram.me/AbrikosLottery_bot"}>Бот крипто лотерей</a></div>
