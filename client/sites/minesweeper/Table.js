@@ -50,7 +50,9 @@ export default function Table(props) {
                 break;
             case 'release':
                 setSmile('Norm');
+                //FIRST CELL
                 if (!timerOn) {
+                    timerReset(false);
                     toggleTimer(true);
                     placeMines(field, cell);
                 }
@@ -61,12 +63,13 @@ export default function Table(props) {
                     field.cells[cell.index].status = 'this-mine';
                     timerReset(false);
                     toggleTimer(false);
-                    setSmile('Death')
+                    setSmile('Death');
                     break;
                 }
 
                 calcNearMines(field, cell);
                 let initial = field.cells.filter(c => c.status === 'initial');
+                //WIN
                 if (initial.length === field.level.mines) {
                     setSmile('Win');
                     toggleTimer(false);
@@ -134,9 +137,8 @@ export default function Table(props) {
             return 0.5 - Math.random()
         });
         mines = mines.slice(0, field.level.mines);
-        const placed = [1, 7, 10, 12, 15, 17, 20, 25, 29, 40];
-        mines = [];
-        for (const index of placed) mines.push({index});
+        //FIXED MINES
+        //const placed = [1, 7, 10, 12, 15, 17, 20, 25, 29, 40];        mines = [];        for (const index of placed) mines.push({index});
         for (const m of mines) {
             field.cells[m.index].mine = true;
         }
@@ -199,7 +201,6 @@ export default function Table(props) {
             </tr>
             <tr>
                 <td>
-                    {drawRows().length}
                     <table className={'board'}>
                         <tbody>
                         {drawRows()}

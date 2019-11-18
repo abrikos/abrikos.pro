@@ -2,7 +2,7 @@
   font-family: "Digital";
   src: url("/digital-7.ttf") format("truetype"); }
 .content.minesweeper .cellImage {
-  width: 70px; }
+  width: 50px; }
 .content.minesweeper table.minesweeper td {
   background-color: silver;
   padding: 5px;
@@ -10,16 +10,18 @@
   border: 2px outset #CCC; }
   .content.minesweeper table.minesweeper td .digital {
     color: red;
-    font-size: 4em;
+    font-size: 3em;
     font-family: "Digital", sans-serif;
     padding: 0;
-    line-height: 1px; }
+    line-height: 1px;
+    text-align: right;
+    padding: 10px; }
 .content.minesweeper table.minesweeper table.board td {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100%; }
+  background-size: 70%; }
 .content.minesweeper table.minesweeper table.board td.bomb-near {
   background-color: #DDD; }
 .content.minesweeper table.minesweeper table.board td.checked {
@@ -35,27 +37,27 @@
   border-style: inset; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-1 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-2 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-3 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-4 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-5 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-6 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-7 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 .content.minesweeper table.minesweeper table.board td.bombs-count-8 {
   background-color: #EEE;
-  background-size: 35px; }
+  background-size: 25px; }
 
 /*# sourceMappingURL=minesweeper.css.map */

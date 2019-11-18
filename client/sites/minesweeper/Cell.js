@@ -37,5 +37,6 @@ export default function Cell(props) {
             backgroundImage: `url(${cellBgImages[getImage()]})`
         }}
         {...rest}
-    >{props.status}</td>
+    />
+
 }
