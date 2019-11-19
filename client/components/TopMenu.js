@@ -25,9 +25,12 @@ export default function TopMenu(props) {
                                     {item.label}
                                 </DropdownToggle>
                                 <DropdownMenu>
-                                    {item.items.map((itemSub, i)=><DropdownItem key={i}>
-                                        <A href={itemSub.path}>{itemSub.label}</A>
-                                    </DropdownItem>)}
+                                    {item.items.map((itemSub, i) => {
+                                        const ps = itemSub.path ? {href: itemSub.path} : itemSub.onClick ? {href: '#', onClick: itemSub.onClick} : {href: '#'}
+                                        return <DropdownItem key={i}>
+                                            <A {...ps}>{itemSub.label}</A>
+                                        </DropdownItem>
+                                    })}
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                             :

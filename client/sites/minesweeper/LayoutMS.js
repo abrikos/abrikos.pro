@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Alert} from "reactstrap";
 import {A, useRoutes} from "hookrouter";
 import routes from "./RoutesMS";
-import {t} from "client/Translator";
+import {t,changeLanguage} from "client/Translator";
 
 
 export default function LayoutMain(props) {
@@ -13,20 +13,20 @@ export default function LayoutMain(props) {
     const menuItems = [
         {label: t('Home'), path: '/'},
         {label: t('Contacts'), path: '/contacts'},
-        /*{label: 'DropDown', items:[
-                {label:'AAAAAAaa', path:'/contacts'},
-                {label:'BBBB', path:'/about'},
-            ]},*/
+        {label: 'Language', items:[
+                {label:'RU', onClick:()=>changeLanguage('ru')},
+                {label:'EN', onClick:()=>changeLanguage('en')},
+            ]},
     ];
 
     return <div className={'content minesweeper'}>
-        <TopMenu {...rest} items={menuItems} title={'Minesweeper'}/>
-        <div className={'container'}>
+        <TopMenu {...rest} items={menuItems} title={t('Minesweeper')}/>
+        <div className={'container p-2'}>
             <Alert {...alert}/>
             {routeResult}
         </div>
-        <footer>
-            Footer
+        <footer className={'bg-dark text-center'}>
+            <a href={'https://www.abrikos.pro'} className={'text-light'}>Abrikos.pro</a>
         </footer>
     </div>
 

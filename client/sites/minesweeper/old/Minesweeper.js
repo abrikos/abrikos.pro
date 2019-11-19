@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import Config from './config'
-import Field from './Field';
+import Config from 'client/sites/minesweeper/config'
+import Field from 'client/sites/minesweeper/old/Field';
 import {Button, ButtonGroup} from 'reactstrap';
-import './minesweeper.css'
+import 'client/sites/minesweeper/minesweeper.css'
 import {t, changeLanguage} from "client/Translator";
 import * as Images from "./images"
 import cellBgImages from './images/cellBgImages'

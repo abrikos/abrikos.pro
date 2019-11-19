@@ -2,13 +2,15 @@ import React, {useEffect, useReducer, useState} from "react";
 import Cell from "./Cell";
 import {Button, ButtonGroup} from "reactstrap";
 import {t} from "client/Translator";
-import Timer from "client/sites/minesweeper/timer";
-import * as Images from "client/sites/minesweeper/images";
-import config from "./config"
+import Timer from "./timer";
+import * as Images from "./images";
+import config from "./config";
+import './minesweeper.css';
 import Loader from "client/components/Loader";
 
 export default function Table(props) {
-    const initField = {cells: initCells(config.levels[0]), level: config.levels[0]};
+    const lev = 0;
+    const initField = {cells: initCells(config.levels[lev]), level: config.levels[lev]};
 
     const [smileImage, setSmile] = useState('Norm');
     const [timerOn, toggleTimer] = useState(false);
@@ -16,6 +18,11 @@ export default function Table(props) {
     const [playing, setPlaying] = useState(true);
     const [minesLeft, setMinesLeft] = useState(0);
     const [field, updateField] = useReducer(reducer, initField);
+
+    useEffect(() => {
+        console.log('RIGHT CLICK')
+        document.addEventListener('contextmenu', e => e.preventDefault());
+    }, []);
 
 
     function initCells(level) {
@@ -27,10 +34,6 @@ export default function Table(props) {
         return array;
     }
 
-    useEffect(() => {
-        console.log('RIGHT CLICK')
-        document.addEventListener('contextmenu', e => e.preventDefault());
-    }, []);
 
 
     function reducer(field, updateFieldArgs) {
@@ -106,7 +109,7 @@ export default function Table(props) {
         if (cell.mines > 0) {
             return;
         }
-        const beChecked = [1, 3, 5, 7]
+        const beChecked = [0, 1, 2, 3, 5, 6, 7, 8]
         for (const i of beChecked) {
             let row = Math.floor(i / 3);
             let col = i % 3;
@@ -141,7 +144,11 @@ export default function Table(props) {
         });
         mines = mines.slice(0, field.level.mines);
         //FIXED MINES
-        //const placed = [1, 7, 10, 12, 15, 17, 20, 25, 29, 40];        mines = [];        for (const index of placed) mines.push({index});
+        if(0) {
+            const placed = [1, 7, 10, 12, 15, 17, 20, 25, 29, 40];
+            mines = [];
+            for (const index of placed) mines.push({index});
+        }
         for (const m of mines) {
             field.cells[m.index].mine = true;
         }
@@ -155,30 +162,27 @@ export default function Table(props) {
         return cell.status;
     }
 
-    function drawRows() {
-        let rows = [];
-        let cols = [];
-        let r = 0;
+    const rows = [];
+    let cols = [];
+    let r = 0;
 
-        for (let cell of field.cells) {
-            let row = Math.floor(cell.index / field.level.cols);
-            if (row !== r) {
-                r = row;
-                rows.push(<tr key={row} children={cols}/>);
-                cols = []
-            }
-            cols.push(<Cell key={cell.index} status={calcState(cell)} updateField={result => updateField({result, cell})} {...cell}/>);
+    for (let cell of field.cells) {
+        let row = Math.floor(cell.index / field.level.cols);
+        if (row !== r) {
+            r = row;
+            rows.push(<tr key={row} children={cols}/>);
+            cols = []
         }
-        rows.push(<tr key={r + 1} children={cols}/>);
-        return rows;
+        cols.push(<Cell key={cell.index} status={calcState(cell)} updateField={result => updateField({result, cell})} {...cell}/>);
     }
+    rows.push(<tr key={r + 1} children={cols}/>);
 
     return <div className="admin-profile text-center">
         <div>
             <ButtonGroup>
-                <Button onClick={() => updateField({result: 'restart', levelIndex: 0})} color='primary'>{t('Level')} 1</Button>
-                <Button onClick={() => updateField({result: 'restart', levelIndex: 1})} color='secondary'>{t('Level')} 2</Button>
-                <Button onClick={() => updateField({result: 'restart', levelIndex: 2})} color='warning'>{t('Level')} 3</Button>
+                <Button onMouseDown={() => updateField({result: 'push'})} onMouseUp={() => updateField({result: 'restart', levelIndex: 0})} color='primary'>{t('Level')} 1</Button>
+                <Button onMouseDown={() => updateField({result: 'push'})} onMouseUp={() => updateField({result: 'restart', levelIndex: 1})} color='secondary'>{t('Level')} 2</Button>
+                <Button onMouseDown={() => updateField({result: 'push'})} onMouseUp={() => updateField({result: 'restart', levelIndex: 2})} color='warning'>{t('Level')} 3</Button>
             </ButtonGroup>
         </div>
         <table border="1" className='minesweeper m-auto'>
@@ -206,10 +210,11 @@ export default function Table(props) {
                 <td>
                     <table className={'board'}>
                         <tbody>
-                        {drawRows()}
+                        {rows}
                         </tbody>
-
                     </table>
+                    <div>{t('Field size')}: {field.level.rows}x{field.level.cols}</div>
+                    <div>{t('Mines')}: {field.level.mines}</div>
                 </td>
             </tr>
             </tbody>
@@ -217,3 +222,4 @@ export default function Table(props) {
 
     </div>;
 }
+
