@@ -20,7 +20,7 @@ export default function LayoutMain(props) {
     ];
 
     return <div className={'content minesweeper'}>
-        <TopMenu {...rest} items={menuItems} title={t('Minesweeper')}/>
+        <TopMenu {...rest} items={menuItems} title="SVG тестирование"/>
         <div className={'container p-2'}>
             <Alert {...alert}/>
             {routeResult}
