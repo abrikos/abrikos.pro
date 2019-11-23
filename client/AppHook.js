@@ -5,6 +5,7 @@ import url from "url";
 import LayoutMS from "client/sites/minesweeper/LayoutMS";
 import API from "client/API";
 import LayoutSvg from "client/sites/svg/LayoutSvg";
+import LayoutFiller from "client/sites/filler/LayoutFiller";
 
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
             {site==='main' && <LayoutMain {...params}/>}
             {site==='minesweeper' && <LayoutMS {...params}/>}
             {site==='svg' && <LayoutSvg {...params}/>}
+            {site==='filler' && <LayoutFiller {...params}/>}
         </div>
     );
 }
