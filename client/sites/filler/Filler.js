@@ -23,8 +23,27 @@ export default class Filler{
             let row = Math.floor(index / this.cols);
             let col = index % this.cols;
             const fill = this.randomColor();
-            this.cells.push({index, color: fill, row, col, fill,  ...this.getSizes({row,col})})
+            this.cells.push({index, row, col, fill,  ...this.getSizes({row,col})})
         }
+        this.cells[0].fill = 'blue';
+        this.cells[1].fill = 'blue';
+        this.cells[2].fill = 'blue';
+        this.cells[3].fill = 'blue';
+        this.cells[4].fill = 'red';
+        this.cells[30].fill = 'blue';
+        this.cells[31].fill = 'red';
+        this.cells[32].fill = 'red';
+        this.cells[33].fill = 'green';
+        this.cells[34].fill = 'green';
+        this.cells[60].fill = 'blue';
+        this.cells[61].fill = 'blue';
+        this.cells[62].fill = 'red';
+        this.cells[90].fill = 'blue';
+        this.cells[91].fill = 'red';
+        this.cells[120].fill = 'green';
+        this.cells[121].fill = 'green';
+        this.cells[150].fill = 'red';
+        this.cells[151].fill = 'blue';
     };
 
     randomColor() {
