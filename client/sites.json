@@ -1,11 +1,11 @@
 {
   "abrikos.pro": "main",
   "www.abrikos.pro": "main",
-  "local.abrikos.pro": "main",
+  "abrikos.local": "main",
   "minesweeper.abrikos.pro": "minesweeper",
-  "ms-local.abrikos.pro": "minesweeper",
-  "svg.abrikos.com": "svg",
+  "ms.abrikos.local": "minesweeper",
   "svg.abrikos.pro": "svg",
-  "filler.abrikos.com": "filler",
-  "filler.abrikos.pro": "filler"
+  "svg.abrikos.local": "svg",
+  "filler.abrikos.pro": "filler",
+  "filler.abrikos.local": "filler"
 }
