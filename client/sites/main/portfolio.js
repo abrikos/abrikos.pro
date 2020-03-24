@@ -5,6 +5,7 @@ export default function Portfolio(props) {
 
     return <div className={'text-center'}>
         <h1>Портфолио</h1>
+        <div><a href={"https://www.beru14.ru"} target={'_blank'}>Сайт бесплатных объявлений</a></div>
         <div><a href={"http://purchases.abrikos.pro/"} target={'_blank'}>Сервис управления списками закупок</a></div>
         <div><a href={"https://svg.abrikos.pro"} target={'_blank'}>Эксперименты с SVG</a></div>
         <div><a href={"https://minesweeper.abrikos.pro"} target={'_blank'}>Классическая игра "Сапер"</a></div>
