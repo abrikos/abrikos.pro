@@ -10,7 +10,7 @@ export default function Contacts() {
         <dl>
             {contacts.map((c,i)=><div key={i}>
                 <dt>{c.label}</dt>
-                <dd><a href={c.link}>{c.label}</a></dd>
+                <dd><a href={c.link}>{c.link}</a></dd>
             </div>)}
         </dl>
     </div>
