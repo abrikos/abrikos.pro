@@ -7,7 +7,9 @@ export default function Portfolio(props) {
         {url: 'http://iltumen.ru/', description: 'Государственное собрание (ИЛ ТУМЭН) РС(Я)'},
         {url: 'http://sakhaenergo.ru/', description: 'АО «Сахаэнерго»(ОАО «Сахаэнерго»)'},
         {url: 'https://kadry.sakha.gov.ru/', description: 'Кадровый портал РС(Я)'},
-        {url: 'https://asrsya.ru/', description: 'Академия Наук РС(Я)'}
+        {url: 'https://asrsya.ru/', description: 'Академия Наук РС(Я)'},
+        {url: 'https://math.asrsya.ru/', description: 'Научно−исследовательский семинар "Неклассические задачи математической физики"'},
+        {url: 'https://schools.asrsya.ru/', description: 'Сеть школ первого Президента Республики Саха (Якутия) М.Е. Николаева'},
     ]
     return <div className={'text-center'}>
         <h1>Портфолио</h1>
